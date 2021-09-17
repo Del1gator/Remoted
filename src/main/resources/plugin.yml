@@ -1,0 +1,7 @@
+name: Remoted
+version: '${project.version}'
+main: ru.enikeian.main.Main
+api-version: 1.17
+prefix: Remoted
+authors: [ Enikeian, Del1gator ]
+website: https://enikeian.ru
