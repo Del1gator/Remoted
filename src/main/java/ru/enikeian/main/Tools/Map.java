@@ -1,9 +1,12 @@
 package ru.enikeian.main.Tools;
 
-import jdk.internal.org.jline.reader.ConfigurationPath;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
+import ru.enikeian.main.Enums.Team;
 import ru.enikeian.main.Main;
 
 public class Map {
@@ -23,12 +26,57 @@ public class Map {
     public static void changeLevel(String map_name) {
         if(!map_exists(map_name)) {
             Bukkit.getLogger().severe("Map " + map_name + "not found! Changing map to default " + default_map);
+            chat.sendAll("[%team%Enikeian§r] Карта не найдена! Ставлю %team%" + default_map);
+            changeLevel(default_map); // Рекурсия для смены карты на дефолт
+        }
+
+        for(Player players : Bukkit.getOnlinePlayers()) {
+            Game.changeTeam(players, Team.SPECTATOR);
+            players.teleport(getLobby());
+        }
+
+        Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
+
+        org.bukkit.scoreboard.Team red = board.getTeam("red");
+        org.bukkit.scoreboard.Team blue = board.getTeam("blue");
+        org.bukkit.scoreboard.Team spectator = board.getTeam("spectator");
+
+//        Получение спавна команд
+        int red_x = Integer.parseInt(getSetting(map_name + ".red_spawn.x"));
+        int red_y = Integer.parseInt(getSetting(map_name + ".red_spawn.y"));
+        int red_z = Integer.parseInt(getSetting(map_name + ".red_spawn.z"));
+
+        int blue_x = Integer.parseInt(getSetting(map_name + ".blue_spawn.x"));
+        int blue_y = Integer.parseInt(getSetting(map_name + ".blue_spawn.y"));
+        int blue_z = Integer.parseInt(getSetting(map_name + ".blue_spawn.z"));
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if(red.hasPlayer(player))
+                player.teleport(new Location(Bukkit.getWorld("world"), red_x, red_y, red_z));
+
+            else if (blue.hasPlayer(player))
+                player.teleport(new Location(Bukkit.getWorld("world"), blue_x, blue_y, blue_z));
+
+            else
+                player.teleport(new Location(Bukkit.getWorld("world"), red_x, red_y, red_z));
         }
     }
 
     private static Boolean map_exists(String name) {
-        return true; // soon
+        return getSetting("maps.%map%".replace("%map%", name)) != null;
+    }
+
+    public static String getSetting(String to_get) {
+        return String.valueOf(config.get(to_get));
     }
 
     public static void addConfig(FileConfiguration file) {config = file;}
+
+    public static Location getLobby() {
+        int x = Integer.parseInt(getSetting("lobby.x"));
+        int y = Integer.parseInt(getSetting("lobby.y"));
+        int z = Integer.parseInt(getSetting("lobby.z"));
+
+        return new Location(Bukkit.getWorld("world"), x, y, z);
+    }
 }

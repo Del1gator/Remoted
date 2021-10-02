@@ -1,0 +1,41 @@
+maps:
+  vip_mineshaft:
+    blue_spawn:
+      x: 0
+      y: 0
+      z: 0
+    red_spawn:
+      x: 0
+      y: 0
+      z: 0
+
+
+    save_block: stone # блоки для спасения V.I.P
+    timeout: 60 # Время на спасение V.I.P в секундах.
+
+    vip:
+      respawn: false
+      count: 1 # Сколько VIP может возврождаться если respawn = true
+      change_vip_respawn: false # Менять VIP игорока если 1 игрок умер?
+      hp: 25 # Сколько дадут сердец
+
+    preparation:
+      time: 61 # Сколько времени выделено на подготовку | секунды
+      doors:
+        a:
+          x1: 0
+          y1: 0
+          z1: 0
+
+          x2: 0
+          y2: 0
+          z2: 0
+
+lobby:
+  x: 0
+  y: 0
+  z: 0
+  # Координаты лобби
+  # Используется при ошибках или загрузке карт
+
+version: 0.1.0 # Чекает весию с гитхаба
