@@ -6,11 +6,12 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
+import ru.enikeian.main.Enums.Mode;
 import ru.enikeian.main.Enums.Team;
 import ru.enikeian.main.Main;
 
 public class Map {
-    private String currect;
+    public static String currect = null;
 
     private static Main plugin;
     private static FileConfiguration config;
@@ -60,6 +61,9 @@ public class Map {
             else
                 player.teleport(new Location(Bukkit.getWorld("world"), red_x, red_y, red_z));
         }
+
+        currect = map_name;
+        Game.startGame(currect);
     }
 
     private static Boolean map_exists(String name) {
@@ -78,5 +82,15 @@ public class Map {
         int z = Integer.parseInt(getSetting("lobby.z"));
 
         return new Location(Bukkit.getWorld("world"), x, y, z);
+    }
+
+    public static String getExpanded() {
+        if (currect.startsWith(Mode.VIP.getPrefix())) return Mode.VIP.getExpanded();
+        else if (currect.startsWith(Mode.CAPTURE_POINTS.getPrefix())) return Mode.CAPTURE_POINTS.getExpanded();
+        else if (currect.startsWith(Mode.CAPTURE_ALL_POINTS.getPrefix())) return Mode.CAPTURE_ALL_POINTS.getExpanded();
+        else if (currect.startsWith(Mode.CAPTURE_THE_FLAG.getPrefix())) return Mode.CAPTURE_THE_FLAG.getExpanded();
+        else if (currect.startsWith(Mode.ZOMBIE_INFECT.getPrefix())) return Mode.ZOMBIE_INFECT.getExpanded();
+        else if (currect.startsWith(Mode.DEATH_MATCH.getPrefix())) return Mode.DEATH_MATCH.getExpanded();
+        else return Mode.ESCORT_MINECART.getExpanded();
     }
 }

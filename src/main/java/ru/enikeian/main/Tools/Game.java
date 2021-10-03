@@ -5,8 +5,15 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import ru.enikeian.main.Enums.Team;
+import ru.enikeian.main.Gamemode.vip;
 
 public class Game {
+
+    private static ru.enikeian.main.Gamemode.vip vip;
+
+    public Game(ru.enikeian.main.Gamemode.vip vip) {
+        Game.vip = vip;
+    }
 
     public static void changeTeam(Player player, Team team) {
 
@@ -36,6 +43,12 @@ public class Game {
         }
     }
 
+    public static void startGame(String map) {
+        if (map.startsWith("vip_")) {
+            vip.enabled = true;
 
+            vip.start();
+        }
+    }
 
 }

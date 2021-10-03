@@ -12,8 +12,12 @@ public class vip implements Listener {
     public boolean utils = true;
     public String version = "0.0.1";
 
-    public static void start() {}
-    public static void end() {}
-    public static void PlayerDied(Player player) {}
+    public boolean enabled = false;
+
+    public void start() {
+
+    }
+
+    public void end() {}
 
 }
