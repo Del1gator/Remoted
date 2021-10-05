@@ -38,4 +38,12 @@ lobby:
   # Координаты лобби
   # Используется при ошибках или загрузке карт
 
+warmup:
+  x: 0
+  y: 0
+  z: 0
+
+  settings:
+    tlp: true # Teleport on low players
+
 version: 0.1.0 # Чекает весию с гитхаба

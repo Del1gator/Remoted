@@ -7,6 +7,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import ru.enikeian.main.Enums.Team;
 import ru.enikeian.main.Gamemode.vip;
 
+import static ru.enikeian.main.Tools.Map.getSetting;
+
 public class Game {
 
     private static ru.enikeian.main.Gamemode.vip vip;
@@ -44,6 +46,17 @@ public class Game {
     }
 
     public static void startGame(String map) {
+
+        if(Bukkit.getOnlinePlayers().size() <= 2) {
+            int x = Integer.parseInt(getSetting("warmup.x"));
+            int y = Integer.parseInt(getSetting("warmup.y"));
+            int z = Integer.parseInt(getSetting("warmup.z"));
+
+            chat.sendAll("[%team%Enikeian§r] Недостаточно игороков чтобы начать карту " + map + ", нужно %team%2§r человека!");
+
+            return;
+        }
+
         if (map.startsWith("vip_")) {
             vip.enabled = true;
 
