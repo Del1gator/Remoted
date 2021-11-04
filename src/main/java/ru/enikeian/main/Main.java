@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.enikeian.main.Tools.Map;
 import ru.enikeian.main.Tools.Teams;
+import ru.enikeian.main.Gamemode.vip;
 import ru.enikeian.main.Tools.chat;
 
 import java.io.File;
@@ -17,11 +18,10 @@ public final class Main extends JavaPlugin {
 
     private File maps_file;
     private FileConfiguration maps;
-    public Main plug = this;
     public static String mode_version = "0.0.1 ALPHA | BUGS";
 
     public static String soft_depencies() {
-        return "DelCore, MyCurrency";
+        return "DelCore, MyCurrency, Enikeian ELO calculator";
     }
 
     @Override
@@ -50,12 +50,14 @@ public final class Main extends JavaPlugin {
                     for (Player players : Bukkit.getOnlinePlayers()) {
                         players.kickPlayer("Сервер выключен из-за ошибки!\nЛоги в: Remoted/assets/logs\nПодробнее на дискорд сервере\nhttps://discord.gg/arEUDEVT9r");
                     }
-                    plug.getServer().shutdown();
+                    getServer().shutdown();
                 }
             }, 200);
         }
 
         Map.addConfig(maps);
+
+        vip.plugin = this;
 
         Teams.setup(); // Настраивание команд для режима
 

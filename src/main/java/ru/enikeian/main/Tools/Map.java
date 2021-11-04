@@ -93,4 +93,26 @@ public class Map {
         else if (currect.startsWith(Mode.DEATH_MATCH.getPrefix())) return Mode.DEATH_MATCH.getExpanded();
         else return Mode.ESCORT_MINECART.getExpanded();
     }
+
+    public static Location getTeamSpawn(Team team) {
+        int blue_x = Integer.parseInt(getSetting(currect + ".blue_spawn.x"));
+        int blue_y = Integer.parseInt(getSetting(currect + ".blue_spawn.y"));
+        int blue_z = Integer.parseInt(getSetting(currect + ".blue_spawn.z"));
+        int red_x = Integer.parseInt(getSetting(currect + ".red_spawn.x"));
+        int red_y = Integer.parseInt(getSetting(currect + ".red_spawn.y"));
+        int red_z = Integer.parseInt(getSetting(currect + ".red_spawn.z"));
+
+        Location spawn;
+
+        switch (team) {
+            default:
+                spawn = new Location(Bukkit.getWorld("world"), red_x, red_y, red_z);
+            case RED:
+                spawn = new Location(Bukkit.getWorld("world"), red_x, red_y, red_z);
+            case BLUE:
+                spawn = new Location(Bukkit.getWorld("world"), blue_x, blue_y, blue_z);
+        }
+
+        return spawn;
+    }
 }

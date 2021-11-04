@@ -6,7 +6,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
-public class Score<sttic> {
+public class Score {
     public static void init(Player player) {
         Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
 

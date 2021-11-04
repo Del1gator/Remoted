@@ -49,6 +49,10 @@ public class chat {
 
         Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
 
+        fadein *= 20;
+        stay *= 20;
+        fadeout *= 20;
+
         Team red = board.getTeam("red");
         Team blue = board.getTeam("blue");
         Team spectator = board.getTeam("spectator"); // Наблюдает за игрой

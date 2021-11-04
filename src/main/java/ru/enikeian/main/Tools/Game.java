@@ -13,6 +13,9 @@ public class Game {
 
     private static ru.enikeian.main.Gamemode.vip vip;
 
+    public static boolean allow_team_change = true;
+    public static boolean match = false;
+
     public Game(ru.enikeian.main.Gamemode.vip vip) {
         Game.vip = vip;
     }
@@ -32,15 +35,18 @@ public class Game {
             case RED:
                 red.addPlayer(player);
                 player.setHealth(0D); // Убийство игорока
+                chat.sendAll("[%team%Enikeian§r] Игрок §c" + player.getName() + "§r сменил свою команду на §cКРАСНЫЕ");
                 break;
             case BLUE:
                 blue.addPlayer(player);
                 player.setHealth(0D);
+                chat.sendAll("[%team%Enikeian§r] Игрок §b" + player.getName() + "§r сменил свою команду на §bСИНИИ");
                 break;
             case SPECTATOR:
                 spectator.addPlayer(player);
                 player.setHealth(0D);
                 player.setGameMode(GameMode.SPECTATOR);
+                chat.sendAll("[%team%Enikeian§r] Игрок §c" + player.getName() + "§r сменил свою команду на §cНАБЛЮДАТЕЛИ");
                 break;
         }
     }
@@ -58,6 +64,7 @@ public class Game {
         }
 
         if (map.startsWith("vip_")) {
+            match = true;
             vip.enabled = true;
 
             vip.start();
