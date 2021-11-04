@@ -20,14 +20,14 @@ public class Teams {
             Bukkit.getLogger().severe("Error while creating team RED: " + error);
         }
         try {
-            Team blue = board.registerNewTeam("red");
+            Team blue = board.registerNewTeam("blue");
             blue.setColor(ChatColor.BLUE);
             blue.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OWN_TEAM);
         } catch (Exception error) {
             Bukkit.getLogger().severe("Error while creating team RED: " + error);
         }
         try {
-            Team spectator = board.registerNewTeam("red");
+            Team spectator = board.registerNewTeam("spectator");
             spectator.setColor(ChatColor.GRAY);
             spectator.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OWN_TEAM);
         } catch (Exception error) {
